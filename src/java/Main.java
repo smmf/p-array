@@ -32,7 +32,7 @@ public class Main {
     @Atomic
     int getArraySize() {
 	AppRoot appRoot = FenixFramework.getRoot();
-	return appRoot.getIntContainersCount();
+	return appRoot.getIndirectionLevelsCount();
     }
 
     void processArgs(String[] args) {
@@ -148,7 +148,7 @@ public class Main {
 
     
     int randomPositionInArray(Random rand) {
-	return rand.nextInt(appRoot.getIntContainersCount());
+	return rand.nextInt(appRoot.getIndirectionLevelsCount());
     }
 
     // absDeviation must be less than or equal to center
@@ -184,7 +184,6 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 	Configuration.initializeFenixFramework();
-
 
 // 	System.out.println("Setting up...");
  	Main main = new Main(args);

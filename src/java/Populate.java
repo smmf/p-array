@@ -5,6 +5,7 @@ import pt.ist.fenixframework.FenixFramework;
 import pt.ist.fenixframework.pstm.Transaction;
 
 import benchmark.domain.AppRoot;
+import benchmark.domain.IndirectionLevel;
 import benchmark.domain.IntContainer;
 
 public class Populate {
@@ -26,7 +27,7 @@ public class Populate {
     static void populate(int nItems) {
 	AppRoot appRoot = FenixFramework.getRoot();
 	for (int i = 0; i < nItems; i++) {
-	    appRoot.addIntContainers(new IntContainer(0));
+	    appRoot.addIndirectionLevels(new IndirectionLevel(0));
 	}
     }
 }

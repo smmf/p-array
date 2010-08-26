@@ -2,16 +2,18 @@ I. ABOUT THIS MICRO-BENCHMARK
 =============================
 
 This micro-benchmark is an application (AppRoot) that holds a set of integer
-wrappers (IntContainer).
+wrappers (IntContainer), through an indirection level to allow only loading
+some IntContainers.
 
-          AppRoot <----->* IntContainer
+                  1     *                  1     1
+          AppRoot <-----> IndirectionLevel <-----> IntContainer
 
-Each transaction will iterate over the set of IntContainers and for each one
-will either:
+Each transaction will iterate over the set of IndirectionLevels and for each
+one will either:
 
 a) do a read of the int value
 b) do a write to the int value
-c) do nothing with the int value
+c) do nothing
 
 The idea is to simulate a given workload and to test how the different
 backends react to it.  At the time of writing the available backends are

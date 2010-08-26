@@ -1,6 +1,7 @@
 import pt.ist.fenixframework.FenixFramework;
 
 import benchmark.domain.AppRoot;
+import benchmark.domain.IndirectionLevel;
 import benchmark.domain.IntContainer;
 
 public class ReadWriteTransactionTask extends TransactionTask {
@@ -31,19 +32,19 @@ public class ReadWriteTransactionTask extends TransactionTask {
 	this.opsToDo = this.readsToDo + this.writesToDo;
 
 	AppRoot appRoot = FenixFramework.getRoot();
-	int totalIterations = appRoot.getIntContainersCount();
+	int totalIterations = appRoot.getIndirectionLevelsCount();
 	int iterationsRemaining = totalIterations;
 
-	for (IntContainer intContainer : appRoot.getIntContainersSet()) {
+	for (IndirectionLevel indirectionLevel : appRoot.getIndirectionLevelsSet()) {
 	    // System.out.print("(" + totalIterations + " - " + iterationsRemaining + " = " + (totalIterations - iterationsRemaining) + ")");
 	    // System.out.print("(" + (totalIterations - iterationsRemaining) + ")");
 	    if (iterationsRemaining <= opsToDo) {
 		//read-or-write only
 		int op = this.rand.nextInt(opsToDo);
 		if (op < readsToDo) {
-		    read(intContainer);
+		    read(indirectionLevel);
 		} else {
-		    write(intContainer);
+		    write(indirectionLevel);
 		}
 	    } else { // here we may or may not do an operation
 		// [0; numreads[                          => read
@@ -51,9 +52,9 @@ public class ReadWriteTransactionTask extends TransactionTask {
 		// [numreads+numwrites; totalIterations [ => do nothing
 		int op = this.rand.nextInt(totalIterations);
 		if (op < this.numReads) {
-		    maybeRead(intContainer);
+		    maybeRead(indirectionLevel);
 		} else if (op < this.numReads + this.numWrites) {
-		    maybeWrite(intContainer);
+		    maybeWrite(indirectionLevel);
 		} // else skip this position
 	    }
 	    iterationsRemaining--;
@@ -61,23 +62,22 @@ public class ReadWriteTransactionTask extends TransactionTask {
 	}
     }
 
-    protected void maybeRead(IntContainer ic) {
-	if (this.readsToDo > 0) { read(ic); }
+    protected void maybeRead(IndirectionLevel il) {
+	if (this.readsToDo > 0) { read(il); }
     }
 
-    protected void maybeWrite(IntContainer ic) {
-	if (this.writesToDo > 0) { write(ic); }
+    protected void maybeWrite(IndirectionLevel il) {
+	if (this.writesToDo > 0) { write(il); }
     }
 
-    protected void read(IntContainer ic) {
-	this.result = ic.getI();
+    protected void read(IndirectionLevel il) {
+	this.result = il.getIntContainer().getI();
 	this.readsToDo--; this.opsToDo--;
 	// System.out.print("\tR (R:" + this.readsToDo + ")(W:" + this.writesToDo + ")(T:" + this.opsToDo + ")");
     }
 
-    protected void write(IntContainer ic) {
-	// ic.getI();
-	ic.setI(this.writesToDo);
+    protected void write(IndirectionLevel il) {
+	il.getIntContainer().setI(this.writesToDo);
 	this.writesToDo--; this.opsToDo--;
 	// System.out.print("\tW (R:" + this.readsToDo + ")(W:" + this.writesToDo + ")(T:" + this.opsToDo + ")");
     }

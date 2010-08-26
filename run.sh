@@ -6,4 +6,4 @@ for i in lib/*; do
     CLASSPATH=${CLASSPATH}:${i}
 done
 
-java -cp ${CLASSPATH} Main $*
+java -Xmx512m -cp ${CLASSPATH} Main $*

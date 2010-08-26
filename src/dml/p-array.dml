@@ -3,14 +3,23 @@ package benchmark.domain;
 
 class AppRoot {}
 
+class IndirectionLevel {
+}
+
 class IntContainer {
     int i;
 }
 
-relation AppRootHasIntContainer {
+relation AppRootHasIndirectionLevels {
     AppRoot playsRole owner;
-    IntContainer playsRole intContainers {
+    IndirectionLevel playsRole indirectionLevels {
         multiplicity *;
     }
 }
+
+relation IndirectionLevelHasIntContainer {
+    IndirectionLevel playsRole indirectionLevels;
+    IntContainer playsRole intContainer;
+}
+
 
