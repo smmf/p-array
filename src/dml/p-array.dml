@@ -1,0 +1,16 @@
+
+package benchmark.domain;
+
+class AppRoot {}
+
+class IntContainer {
+    int i;
+}
+
+relation AppRootHasIntContainer {
+    AppRoot playsRole owner;
+    IntContainer playsRole intContainers {
+        multiplicity *;
+    }
+}
+
