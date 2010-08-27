@@ -5,6 +5,7 @@
   <property name="src.gen.dir" location="src_gen"/>
   <property name="java.src.dir" location="${src.dir}/java"/>
   <property name="dml.src.dir" location="${src.dir}/dml"/>
+  <property name="config.dir" location="config"/>
   <property name="build.dir" location="classes"/>
   <property name="domain.dml" location="${dml.src.dir}/p-array.dml"/>
 
@@ -65,6 +66,7 @@
 
     <copy todir="${build.dir}">
       <fileset dir="${dml.src.dir}" />
+      <fileset dir="${config.dir}" />
     </copy>
   </target>
 
