@@ -26,6 +26,7 @@ public class Populate {
     @Atomic
     static void populate(int nItems) {
 	AppRoot appRoot = FenixFramework.getRoot();
+	System.out.println(appRoot.getIndirectionLevelsCount());
 	for (int i = 0; i < nItems; i++) {
 	    appRoot.addIndirectionLevels(new IndirectionLevel(0));
 	}

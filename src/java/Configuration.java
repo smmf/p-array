@@ -37,18 +37,18 @@ public class Configuration {
 	       changes */
 	    // updateRepositoryStructureIfNeeded = true;
         }};
-        // Config configHBaseBDB = new Config() {{
-        //     domainModelPath = "/p-array.dml";
-        //     dbAlias = "/tmp/array-bdb";
-        //     dbUsername = "";
-        //     dbPassword = "";
-        //     rootClass = benchmark.domain.AppRoot.class;
-	//     repositoryType = pt.ist.fenixframework.Config.RepositoryType.BERKELEYDB;
-	//     /* uncomment the next line if you want the repository structure automatically updated when your domain definition
-	//        changes */
-	//     // updateRepositoryStructureIfNeeded = true;
-        // }};
-        FenixFramework.initialize(configOJB);
+        Config configHBaseBDB = new Config() {{
+            domainModelPath = "/p-array.dml";
+            dbAlias = "/tmp/array-bdb";
+            dbUsername = "";
+            dbPassword = "";
+            rootClass = benchmark.domain.AppRoot.class;
+	    repositoryType = pt.ist.fenixframework.Config.RepositoryType.BERKELEYDB;
+	    /* uncomment the next line if you want the repository structure automatically updated when your domain definition
+	       changes */
+	    // updateRepositoryStructureIfNeeded = true;
+        }};
+        FenixFramework.initialize(configHBaseBDB);
     }
     
 }

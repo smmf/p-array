@@ -14,6 +14,7 @@ import pt.ist.fenixframework.pstm.Transaction;
 import pt.ist.fenixframework.pstm.AbstractDomainObject;
 
 import benchmark.domain.AppRoot;
+import benchmark.domain.IndirectionLevel;
 
 public class Main {
 
@@ -32,6 +33,14 @@ public class Main {
     @Atomic
     int getArraySize() {
 	AppRoot appRoot = FenixFramework.getRoot();
+	int count = 0;
+	for (IndirectionLevel il : appRoot.getIndirectionLevelsSet()) {
+	    if  (++count % 1000 == 0) {
+		System.out.print(".");
+	    }
+	    il.getIntContainer();
+	}
+	System.out.println("");
 	return appRoot.getIndirectionLevelsCount();
     }
 
